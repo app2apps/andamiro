@@ -31,8 +31,8 @@ public class XMLPullParserDemoA1 extends Activity {
     }
     
     public ArrayList<String> getXmlData() {
-        String rss = "http://www.androidside.com/book/data.xml";
-    	//String rss = "http://brownapps.com/user/pages/rank_list.jsp";
+        //String rss = "http://www.androidside.com/book/data.xml";
+    	String rss = "http://brownapps.com/user/pages/rank_list.jsp";
         
         ArrayList<String> titleList = new ArrayList<String>();
 
@@ -43,14 +43,15 @@ public class XMLPullParserDemoA1 extends Activity {
 
             URL url = new URL(rss);
             InputStream is = url.openStream();
-            xpp.setInput(is, "euc-kr");
-
+            //xpp.setInput(is, "euc-kr");
+            xpp.setInput(is, "utf-8");
+ 
             int eventType = xpp.getEventType();
             
             while (eventType != XmlPullParser.END_DOCUMENT) {                
                 if (eventType == XmlPullParser.START_TAG) {
-                	//if (xpp.getName().equals("g_name")) {
-                	if (xpp.getName().equals("title")) {
+                	if (xpp.getName().equals("g_name")) {
+                	//if (xpp.getName().equals("title")) {
                                 String name = xpp.nextText();
                         titleList.add(name);
                     }
